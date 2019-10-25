@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <script type="text/javascript">
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+      /*  $('#imgfile').change(function () {
+            readURL(this);
+        });*/
+    </script>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>Upload</title>
+</head>
+<body>
+    <div> 
+        @using (Html.BeginForm("FileUpload", "Upload", FormMethod.Post,new { enctype = "multipart/form-data" }))
+        {
+            <label for="file">Upload Image:</label>
+            <input type="file" name="file" id="imgfile" style="width: 100%;"  onchange="readURL(this)"/>
+            <input type="submit" value="Upload" class="submit" />
+        }
+        <img id="blah" src="#" alt="your image" style="height:50%;width:50%;" />
+       
+    </div>
+</body>
+</html>
